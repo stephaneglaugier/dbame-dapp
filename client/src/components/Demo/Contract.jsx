@@ -15,7 +15,7 @@ function Contract({ value }) {
 
   return (
     <code>
-      {`contract SimpleStorage {
+      {`contract Dbame {
   uint256 value = `}
 
       <span className="secondary-color" ref={spanEle}>

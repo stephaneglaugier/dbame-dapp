@@ -4,11 +4,13 @@ import useEth from "../contexts/EthContext/useEth";
 function Form() {
   const [inputValue, setInputValue] = useState('');
 
-  const { state } = useEth();
+  const { state: { contract, accounts } } = useEth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
+
+    contract.methods.castVote(inputValue).send({from: accounts[0]});
   };
 
   const handleChange = (event) => {
