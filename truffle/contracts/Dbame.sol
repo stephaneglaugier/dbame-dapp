@@ -2,13 +2,17 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Dbame {
-    bytes32[] public votes;
-
-    function castVote(bytes32 ballot) public {
-        votes.push(ballot);
+    struct Vote {
+        bytes32[2] vote;
     }
 
-    function getAllVotes() external view returns (bytes32[] memory) {
+    bytes32[2][] public votes;
+
+    function castVote(bytes32 option1, bytes32 option2) public {
+        votes.push([option1, option2]);
+    }
+
+    function getAllVotes() external view returns (bytes32[2][] memory) {
         return votes;
     }
 }
