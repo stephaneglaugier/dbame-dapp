@@ -23,3 +23,31 @@ Summary
 =======
 > Total deployments:   1
 > Final cost:          0.000817910002290148 ETH
+
+----------------------------------------
+
+1_deploy_dbame.js
+=================
+
+   Replacing 'Dbame'
+   -----------------
+   > transaction hash:    0xc8d4cc048dcd682348af7a4de001a5e966b76fece4702572abc6f5eecb29061f
+   > Blocks: 1            Seconds: 12
+   > contract address:    0x015F388bBD5A593693c0B0335aD19447d2949Db9
+   > block number:        3141643
+   > block timestamp:     1679494908
+   > account:             0x6a2f99317c6Af022Ebe49b2B96d212eCB9A516E6
+   > balance:             3.422016754989816722
+   > gas used:            536506 (0x82fba)
+   > gas price:           2.500000007 gwei
+   > value sent:          0 ETH
+   > total cost:          0.001341265003755542 ETH
+
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.001341265003755542 ETH
+
+Summary
+=======
+> Total deployments:   1
+> Final cost:          0.001341265003755542 ETH

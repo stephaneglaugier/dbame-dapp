@@ -24,10 +24,16 @@ html {
 }
 
 #App .container {
-  width: 40%;
-  min-width: 60rem;
+  width: 90%;
   max-width: 75rem;
   height: 100%;
+}
+
+@media (min-width: 768px) {
+  #App .container {
+    width: 40%;
+    min-width: 60rem;
+  }
 }
 
 code {
@@ -101,25 +107,43 @@ hr {
 
 #App .container .demo .contract-container {
   display: flex;
+  flex-direction: column;
 }
 
 #App .container .demo .contract-container code {
-  min-width: 42rem;
-  border-radius: 1rem 0 0 1rem;
+  min-width: 100%;
+  border-radius: 1rem 1rem 0 0;
 }
 
 #App .container .demo .contract-container .btns {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 0 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 1rem;
   background-color: var(--gray);
-  border-radius: 0 1rem 1rem 0;
+  border-radius: 0 0 1rem 1rem;
 }
 
-#App .container .demo .contract-container .btns > * {
+@media (min-width: 768px) {
+  #App .container .demo .contract-container {
+    flex-direction: row;
+  }
+
+  #App .container .demo .contract-container code {
+    border-radius: 1rem 0 0 1rem;
+  }
+
+  #App .container .demo .contract-container .btns {
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 1rem;
+    border-radius: 0 1rem 1rem 0;
+  }
+}
+
+#App .container .demo .contract-container .btns>* {
   width: 12rem;
   display: flex;
   align-items: center;
@@ -130,9 +154,10 @@ hr {
   font-size: 1.2rem;
   font-family: monospace;
   cursor: pointer;
+  margin: 0.5rem;
 }
 
-#App .container .demo .contract-container .btns > *:hover {
+#App .container .demo .contract-container .btns>*:hover {
   background-color: var(--dark-gray);
 }
 
@@ -164,6 +189,7 @@ hr {
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  width: 100%;
 }
 
 .form-button {
@@ -175,4 +201,16 @@ hr {
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+.my-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-right: 10px;
 }
