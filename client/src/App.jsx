@@ -6,24 +6,24 @@ import VotesDisplay from "./components/VotesDisplay";
 import Tally from "./components/Tally";
 
 function App() {
-  return (
-    <EthProvider>
-      <div id="App">
-        <div className="container">
-          <Intro />
-          <hr />
-          <Setup />
-          <hr />
-          <Demo />
-          <hr />
-          <VotesDisplay/>
-          <hr />
-          <Tally/>
-          <hr />
-        </div>
-      </div>
-    </EthProvider>
-  );
+	return (
+		<EthProvider>
+			<div id="App">
+				<div className="container">
+					<Intro />
+					<hr />
+					<Setup />
+					<hr />
+					<Demo />
+					<hr />
+					<VotesDisplay />
+					<hr />
+					<Tally />
+					<hr />
+				</div>
+			</div>
+		</EthProvider>
+	);
 }
 
 export default App;

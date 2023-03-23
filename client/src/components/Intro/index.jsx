@@ -1,11 +1,11 @@
 import Welcome from "./Welcome";
 
 function Intro() {
-  return (
-    <>
-      <Welcome />
-    </>
-  );
+	return (
+		<>
+			<Welcome />
+		</>
+	);
 }
 
 export default Intro;
