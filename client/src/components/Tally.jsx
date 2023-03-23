@@ -40,7 +40,7 @@ const Tally = () => {
 			const { p, candidates, xM, xR, ballots } = await response.json();
 
 			const votes = await contract.methods.getAllVotes().call();
-			const validDecryptedVotes = [];
+			const validDecryptedVotesMap = new Map();
 
 			votes.forEach((vote) => {
 				const parts = vote.split('.');
@@ -53,7 +53,7 @@ const Tally = () => {
 						decryptedBallotString = decryptedBallotString.padStart(32, '0');
 					}
 					if (decryptedBallotString.length === 32) {
-						validDecryptedVotes.push(decryptedBallotString);
+						validDecryptedVotesMap.set(ballotId, decryptedBallotString);
 					}
 				} catch (err) {
 					// Ignore invalid vote strings
@@ -63,6 +63,9 @@ const Tally = () => {
 			const tally = candidates.map(() => 0);
 			const slicedBallots = ballots.map((ballot) => ballot.slice(0, 24));
 
+			const validDecryptedVotes = Array.from(validDecryptedVotesMap.values());
+
+			console.log(validDecryptedVotes.toString());
 			validDecryptedVotes.forEach((vote) => {
 				const ballotId = vote.slice(0, 24);
 				const voteData = vote.slice(24);
