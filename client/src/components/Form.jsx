@@ -57,7 +57,6 @@ function Form() {
 	return (
 		<form onSubmit={handleSubmit} style={{ padding: '20px' }}>
 			<label htmlFor="input" className="form-label">
-				Ballot:
 				<input id="input" type="text" value={inputValue} onChange={handleChange} className="form-input" size="64" />
 			</label>
 			<button type="submit" className="my-button">Submit</button>

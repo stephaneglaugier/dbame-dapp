@@ -24,7 +24,8 @@ const decryptBallot = (c3, c4, p, xm, xr) => {
 const Tally = () => {
 	const { state: { contract } } = useEth();
 
-	const [url, setUrl] = useState('http://192.168.0.16:8080');
+	const [url, setUrl] = useState('http://192.168.0.4:8080');
+	const [votesDisplayed, setVotesDisplayed] = useState([]);
 	const [tallyResults, setTallyResults] = useState([]);
 
 	const [error, setError] = useState(null);
@@ -32,7 +33,6 @@ const Tally = () => {
 	const handleButtonClick = async () => {
 		setError(null);
 		try {
-			console.log(url)
 			const response = await fetch(`${url}/registrar/closed`);
 			if (!response.ok) {
 				throw new Error(`An error occurred: ${response.statusText}`);
@@ -53,6 +53,7 @@ const Tally = () => {
 						decryptedBallotString = decryptedBallotString.padStart(32, '0');
 					}
 					if (decryptedBallotString.length === 32) {
+						const ballotId = decryptedBallotString.slice(0, 24);
 						validDecryptedVotesMap.set(ballotId, decryptedBallotString);
 					}
 				} catch (err) {
@@ -63,7 +64,9 @@ const Tally = () => {
 			const tally = candidates.map(() => 0);
 			const slicedBallots = ballots.map((ballot) => ballot.slice(0, 24));
 
+			console.log(validDecryptedVotesMap)
 			const validDecryptedVotes = Array.from(validDecryptedVotesMap.values());
+			setVotesDisplayed(validDecryptedVotes);
 
 			console.log(validDecryptedVotes.toString());
 			validDecryptedVotes.forEach((vote) => {
@@ -102,26 +105,45 @@ const Tally = () => {
 
 	return (
 		<div>
-			<input
-				type="text"
-				value={url}
-				onChange={(e) => setUrl(e.target.value)}
-				placeholder="Enter URL"
-				className="form-input"
-			/>
-			<button onClick={handleButtonClick} className="my-button">
-				Decrypt Votes
-			</button>
+			<div style={{ padding: 10 }}>
+				<input
+					id="input"
+					type="text"
+					value={url}
+					onChange={(e) => setUrl(e.target.value)}
+					placeholder="Enter registrar URL"
+					className="form-input"
+					size="64"
+				/>
+			</div>
+			<div style={{ padding: 10 }}>
+				<button onClick={handleButtonClick} className="my-button">
+					Count Votes
+				</button>
+			</div>
 			{error && <p className="error-message">{error}</p>}
 			<div>
-				<h2>Results:</h2>
-				<ul>
-					{tallyResults.map((result, index) => (
-						<li key={index} style={{ fontWeight: winners.some(winner => winner.candidate === result.candidate) ? 'bold' : 'normal' }}>
-							{result.candidate}: {result.votes} vote(s) {winners.some(winner => winner.candidate === result.candidate) && '(Winner)'}
-						</li>
-					))}
-				</ul>
+			{votesDisplayed.length > 0 && (
+			<div style={{ padding: 10 }}>
+					<h2>Decrypted Ballots:</h2>
+					<ul>
+						{votesDisplayed.map((item, index) => (
+							<li key={index}>{item}</li>
+						))}
+					</ul>
+				</div>)}
+
+				{tallyResults.length > 0 && (
+				<div style={{ padding: 10 }}>
+					<h2>Results:</h2>
+					<ul>
+						{tallyResults.map((result, index) => (
+							<li key={index} style={{ fontWeight: winners.some(winner => winner.candidate === result.candidate) ? 'bold' : 'normal' }}>
+								{result.candidate}: {result.votes} vote(s) {winners.some(winner => winner.candidate === result.candidate) && '(Winner)'}
+							</li>
+						))}
+					</ul>
+				</div>)}
 			</div>
 		</div>
 	);
